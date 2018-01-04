@@ -11,5 +11,19 @@ module.exports = {
 		contentBase: "./public",
 		historyApiFallback: true,
 		inline: true //实时刷新
+	},
+	module: {
+		rules: [{
+			test: /(\.jsx|\.js)$/,
+			use: {
+				loader: "babel-loader",
+				options: {
+					presets: [
+						"env", "react"
+					]
+				}
+			},
+			exclude: /node_modules/
+		}]
 	}
 }
