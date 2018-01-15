@@ -1,6 +1,0 @@
-@charset "utf-8";
-.root{
-	composes:testcompose from "./main.css";
-	background: #ccc;
-	padding: 10px;	
-}
