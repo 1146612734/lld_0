@@ -7,7 +7,7 @@ module.exports = {
 	},
 	output: {
 		filename: "server-entry.js",
-		publicPath: "/public", //静态资源引用的路径,可以直接写CDN域名的路径 public/[name].[hash].js
+		publicPath: "/public/", //静态资源引用的路径,可以直接写CDN域名的路径 public/[name].[hash].js
 		path: path.join(__dirname, "../dist"),
 		libraryTarget: "commonjs2"
 	},
