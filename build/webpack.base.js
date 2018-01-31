@@ -8,7 +8,10 @@ const path=require("path")
 module.exports= {
   output:{
     path: path.join(__dirname, "../dist"),
-    publicPath: "/public/",                 //静态资源引用的路径,可以直接写CDN域名的路径 public/[name].[hash].js
+    publicPath: "/public/"                //静态资源引用的路径,可以直接写CDN域名的路径 public/[name].[hash].js
+  },
+  resolve:{
+    extensions:['.js','.jsx']
   },
   module: {
     rules: [{
@@ -28,5 +31,5 @@ module.exports= {
         path.join(__dirname, '../node_modules')
       ]
     }]
-  },
+  }
 }

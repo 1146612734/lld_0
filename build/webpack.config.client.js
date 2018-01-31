@@ -3,17 +3,16 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpackMerge=require('webpack-merge')
 const baseconfig=require('./webpack.base')
-//const CleanWebpackPlugin = require("clean-webpack-plugin");
 const isDev=process.env.NODE_ENV==='development';
 const config = webpackMerge(baseconfig, {
- devtool: 'eval-source-map',
- entry: {
-  app: path.join(__dirname, '../client/app.js')
- },
- output: {
-  filename: "[name].[hash].js",
-   ///“__dirname”是node.js中的一个全局变量，它指向当前执行脚本所在的目录。
- },
+  devtool: 'eval-source-map',
+  entry: {
+    app: path.join(__dirname, '../client/app.js')
+  },
+  output: {
+    filename: "[name].[hash].js",
+    ///“__dirname”是node.js中的一个全局变量，它指向当前执行脚本所在的目录。
+  },
  /*devServer: {
   contentBase: "../dist",
   historyApiFallback: true,
@@ -22,20 +21,20 @@ const config = webpackMerge(baseconfig, {
   openPage: "index.html" //指定打开浏览器时要导航的页面
  },*/
 
- plugins: [
-  new webpack.BannerPlugin('版权所有，翻版必究'),
-  new HtmlWebpackPlugin({
-   template:path.join(__dirname,"../client/template.html")
-  })
- ]
+  plugins: [
+    new webpack.BannerPlugin('版权所有，翻版必究'),
+    new HtmlWebpackPlugin({
+      template:path.join(__dirname,"../client/template.html")
+    })
+  ]
 })
 
 
 if(isDev){
  config.entry={
   app:[
-   'react-hot-loader/patch',
-   path.join(__dirname,'../client/app.js')
+    'react-hot-loader/patch',
+    path.join(__dirname,'../client/app.js')
   ]
  }
  config.devServer={
