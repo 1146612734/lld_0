@@ -6,13 +6,13 @@ import { AppContainer } from 'react-hot-loader'; //eslint-disable-line
 import App from './views/App';
 //ReactDom.hydrate(<App/>, document.getElementById("root"))
 
-import appState from './store/app-state'
+import AppState from './store/app-state'
 
 const root = document.getElementById('root');
 const render = (Component) => {
   ReactDom.hydrate(
     <AppContainer>
-      <Provider appState={appState}>
+      <Provider appState={new AppState()}>
         <BrowserRouter>
           <Component />
         </BrowserRouter>

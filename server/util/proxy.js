@@ -13,15 +13,17 @@ module.exports = function (req, res, next) {
       msg: 'need login'
     })
   }
-  const query = Object.assign({}, req.query)
+  const query = Object.assign({}, req.query, {
+    accesstoken: (needAccessToken && req.method === "GET") ? user.accessToken : ''
+  })
   if (query.needAccessToken) delete query.needAccessToken
 
   axios(`${baseUrl}${path}`, {
     method: req.method,
     params: query,
-    //['accessToken':'xxx'] 转换成 'accessToken=xxx'
+    //{'accessToken':'xxx'} 转换成 'accessToken=xxx'
     data: querystring.stringify(Object.assign({}, req.body, {
-      accesstoken: user.accessToken
+      accesstoken: (needAccessToken && req.method === "POST") ? user.accessToken : ''
     })),
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
