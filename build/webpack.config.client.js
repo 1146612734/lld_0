@@ -25,6 +25,10 @@ const config = webpackMerge(baseconfig, {
     new webpack.BannerPlugin('版权所有，翻版必究'),
     new HtmlWebpackPlugin({
       template:path.join(__dirname,"../client/template.html")
+    }),
+    new HtmlWebpackPlugin({
+      template: '!!ejs-compiled-loader!'+ path.join(__dirname, '../client/server.template.ejs'),
+      filename: 'server.ejs'
     })
   ]
 })
