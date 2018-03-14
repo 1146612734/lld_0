@@ -5,7 +5,8 @@
  * @version $Id$
  */
 const express =require('express')
-const ReactSSR=require('react-dom/server')
+//const ReactSSR=require('react-dom/server')
+const serverRender=require('./util/server-render')
 const fs=require("fs")
 const path=require("path")
 const favicon=require('serve-favicon')
@@ -31,18 +32,24 @@ app.use('/api/user', require('./util/handle-login'))
 app.use('/api', require('./util/proxy'))
 
 if(!isDev){
- const serverEntry=require('../dist/server-entry').default
- const template =fs.readFileSync(path.join(__dirname,'../dist/index.html'),'utf8')
+ const serverEntry=require('../dist/server-entry')
+ const template =fs.readFileSync(path.join(__dirname,'../dist/server.ejs'),'utf8')
  app.use('/public',express.static(path.join(__dirname,'../dist')))//返回静态文件
- app.get('*',function(req,res){
-  const appString=ReactSSR.renderToString(serverEntry)
-
-  res.send(template.replace('<!-- app -->',appString))
+ app.get('*',function(req, res, next){
+  serverRender(serverEntry, template, req, res).catch(next)
+  /*const appString=ReactSSR.renderToString(serverEntry)
+  res.send(template.replace('<!-- app -->',appString))*/
  })
 }else{
  const devStatic=require('./util/dev-static')
  devStatic(app)
 }
+
+app.use(function(error, req, res, next) {
+  console.log(error)
+  res.status(500).send(error)
+})
+
 var Server=app.listen(3333,function(){
  console.log('server is listening on 3333')
  // let host=Server.address().host
