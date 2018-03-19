@@ -10,7 +10,7 @@ const path=require('path')
 const MemoryFs=require('memory-fs')  //memory-fs内存里读写文件，更快;fs硬盘上读写文件
 const proxy=require('http-proxy-middleware') //做代理的
 
-const serverRender=require('./server-render')
+const serverRender=require('./server-render') //相对路径引 用要放在 绝对路径引用的定的后面
 
 const serverConfig=require('../../build/webpack.config.server')
 
@@ -29,12 +29,12 @@ const NativeModule = require('module')
 const vm = require('vm')
 const getModuleFromString = (bundle, filename) => {
   const m={ exports: {} }
-  const wrapper = NativeModule.wrap(bundle)
+  const wrapper = NativeModule.wrap(bundle) //wrap()相当于`(function(exports, requires, module, filename, dirname){...bundle code})`
   const script = new vm.Script(wrapper, {
     filename: filename,
     displayErrors: true,
   })
-  const result = script.runInThisContext()
+  const result = script.runInThisContext()  //指定js的执行环境
   result.call(m.exports, m.exports, require, m)
   return m
 }
@@ -62,13 +62,13 @@ serverCompiler.watch({},(err,stats) => {
   //createStoreMap=m.exports.createStoreMap
 })
 
-const getStoreState = (stores) => {
+/*const getStoreState = (stores) => {
   return Object.keys(stores).reduce((result, storeName) => {
     result[storeName]=stores[storeName].toJson()
     return result
   }, {})
 }
-
+*/
 module.exports=function(app){
 	//所有访问/public开头的请求，都代理到http://localhost:8888
 	app.use('/public',proxy({
@@ -79,33 +79,7 @@ module.exports=function(app){
       return res.send('waiting for compile, refresh later')
     }
 		getTemplate().then(template => {
-      serverRender(serverBundle, template, req, res)
-      /*const routerContext={}
-      const stores = createStoreMap()
-      const app=serverBundle(stores, routerContext, req.url)
-
-			asyncBootstrap(app).then(() => {
-        if(routerContext.url){
-          res.status(302).setHeader('Location', routerContext.url)
-          res.end()
-          return
-        }
-        const helmet = Helmet.rewind()
-
-        const state = getStoreState(stores)
-        const content=ReactDomServer.renderToString(app)
-        const html=ejs.render(template, {
-          appString: content,
-          initialState: serialize(state),
-          meta: helmet.meta.toString(),
-          title: helmet.title.toString(),
-          style: helmet.style.toString(),
-          link: helmet.link.toString(),
-        })
-        res.send(html)
-        //res.send(template.replace('<!-- app -->',content))
-      })*/
-
+      return serverRender(serverBundle, template, req, res)
 		}).catch(next)
 	})
 }

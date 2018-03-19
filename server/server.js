@@ -50,7 +50,7 @@ app.use(function(error, req, res, next) {
   res.status(500).send(error)
 })
 
-var Server=app.listen(3333,function(){
+app.listen(3333,function(){
  console.log('server is listening on 3333')
  // let host=Server.address().host
  // let port=Server.address().port
