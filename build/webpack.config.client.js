@@ -35,31 +35,32 @@ const config = webpackMerge(baseconfig, {
 
 
 if(isDev){
- config.entry={
-  app:[
-    'react-hot-loader/patch',
-    path.join(__dirname,'../client/app.js')
-  ]
- }
- config.devServer={
-  host:'0.0.0.0',  //最合适
-  port:'8888',
-  publicPath:'/public/',
-  contentBase:path.join(__dirname, '../dist'),
-  //inline:true,
-  hot:true,
-  overlay:{//webpack编译有任何错误，就在网页显示个黑色浮层，显示错误信息
-   errors:true  //只显示错误信息。不包括warning信息
-  },
-  //historyApiFallback:true
-  historyApiFallback:{
-   index:'/public/index.html'
-  },
-  proxy:{
-    '/api':'http://localhost:3333'
+  config.devtool='#cheap-module-eval-source-map'
+  config.entry={
+    app:[
+      'react-hot-loader/patch',
+      path.join(__dirname,'../client/app.js')
+    ]
   }
- }
- config.plugins.push(new webpack.HotModuleReplacementPlugin())
+  config.devServer={
+    host:'0.0.0.0',  //最合适
+    port:'8888',
+    publicPath:'/public/',
+    //contentBase:path.join(__dirname, '../dist'),
+    //inline:true,
+    hot:true,
+    overlay:{//webpack编译有任何错误，就在网页显示个黑色浮层，显示错误信息
+     errors:true  //只显示错误信息。不包括warning信息
+    },
+    //historyApiFallback:true
+    historyApiFallback:{
+     index:'/public/index.html'
+    },
+    proxy:{
+      '/api':'http://localhost:3333'
+    }
+  }
+  config.plugins.push(new webpack.HotModuleReplacementPlugin())
 }
 
 module.exports=config

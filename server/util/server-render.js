@@ -29,11 +29,20 @@ module.exports = (bundle, template, req, res) => {
     const jss = create(preset())
     jss.options.createGenerateClassName = createGenerateClassName
     const  theme = createMuiTheme({
-      palette: {
-        primary: colors.pink,
-        accent: colors.lightBlue,
-        types: 'light'
-      }
+      pallete: {
+        primary: {
+          light: '#ffc1e3',
+          main: '#f48fb1',
+          dark: '#bf5f82',
+          contrastText: '#fff',
+        },
+        secondary: {
+          light: '#e6ffff',
+          main: '#b3e5fc',
+          dark: '#82b3c9',
+          contrastText: '#fff',
+        },
+      },
     })
     const app=createApp(stores, routerContext, sheetsRegistery, jss, theme, req.url)
 
