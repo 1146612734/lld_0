@@ -9,17 +9,23 @@ import Typography from 'material-ui/Typography'
 import IconButton from 'material-ui/IconButton'
 import MenuIcon from 'material-ui-icons/Menu'
 
-const styles = {
-  root: {
-    width: '100%',
-  },
-  flex: {
-    flex: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
+const styles = (theme) => {
+  return {
+    root: {
+      width: '100%',
+    },
+    flex: {
+      flex: 1,
+    },
+    menuButton: {
+      marginLeft: -12,
+      marginRight: 20,
+    },
+    newtopicButton: {
+      backgroundColor: theme.palette.primary.light,
+      color: '#fff',
+    },
+  }
 }
 
 class MainAppBar extends React.Component {
@@ -55,7 +61,7 @@ class MainAppBar extends React.Component {
             <Typography type="title" color="inherit" className={classes.flex}>
               JNode
             </Typography>
-            <Button color="secondary" variant="raised" size="small" onClick={this.createButtonClick}>
+            <Button className={classes.newtopicButton} color='primary' variant="raised" size="small" onClick={this.createButtonClick}>
               新建话题
             </Button>
             <Button color="inherit" size="small" onClick={this.loginButtonClick}>

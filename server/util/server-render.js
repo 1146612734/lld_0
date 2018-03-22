@@ -31,9 +31,9 @@ module.exports = (bundle, template, req, res) => {
     const  theme = createMuiTheme({
       pallete: {
         primary: {
-          light: '#ffc1e3',
-          main: '#f48fb1',
-          dark: '#bf5f82',
+          light: '#FF80AB',
+          main: '#FF4081',
+          dark: '#F50057',
           contrastText: '#fff',
         },
         secondary: {
