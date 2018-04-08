@@ -73,18 +73,20 @@ export default class TopicList extends React.Component {
       search: `?tab=${value}`,
     })
   }
-  /*eslint-disable*/
-  listItemClick(e) {
 
+  listItemClick(topic) {
+    this.context.router.history.push(`/detail/${topic.id}`)
   }
-  /*eslint-ensable*/
 
   render() {
     const {
       topicStore,
     } = this.props
     const topicList = topicStore.topics
-    const syncing = topicStore.syncing
+    //const syncing = topicStore.syncing
+    const {
+      syncing,
+    } = topicStore
     const tab = this.getTab()
 
     // const topic = {
@@ -100,18 +102,22 @@ export default class TopicList extends React.Component {
       <Container>
         <Helmet>
           <meta name="description" content="This is description" />
-          <title>This is topic list</title>
+          <title>话题列表</title>
         </Helmet>
         <Tabs value={tab} onChange={this.changeTab}>
           {
-            Object.keys(tabs).map((tab1) => (
+            Object.keys(tabs).map(tab1 => (
               <Tab key={tab1} label={tabs[tab1]} value={tab1} />
             ))
           }
         </Tabs>
         <List>
           {
-            topicList.map(topic => <TopicListItem key={topic.id} onClick={this.listItemClick} topic={topic}/>)
+            topicList.map(topic => (<TopicListItem
+              key={topic.id}
+              onClick={() => this.listItemClick(topic)}
+              topic={topic}
+            />))
           }
         </List>
         {
@@ -124,7 +130,7 @@ export default class TopicList extends React.Component {
                   padding: '40px 0',
                 }}
               >
-                <CircularProgress color="secondary" size={100}/>
+                <CircularProgress color="secondary" size={100} />
               </div>
             ) : null
         }

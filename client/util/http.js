@@ -8,7 +8,7 @@ const parseUrl = (url, params) => {
     return result
   }, '')
   console.log(str)
-  return `${baseUrl}/api/${url}?${str.substr(0, str.length - 1)}`
+  return `${baseUrl}/api${url}?${str.substr(0, str.length - 1)}`
 }
 
 export const get = (url, params) => {
@@ -28,8 +28,9 @@ export const get = (url, params) => {
 }
 
 export const post = (url, params, datas) => {
+  console.log(baseUrl)
   return new Promise((resolve, reject) => {
-    axios.get(parseUrl(url, params), datas)
+    axios.post(parseUrl(url, params), datas)
       .then((resp) => {
         const {
           data,
