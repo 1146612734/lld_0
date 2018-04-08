@@ -3,11 +3,11 @@ import axios from 'axios'
 const baseUrl = process.env.API_BASE || ''
 
 const parseUrl = (url, params) => {
+  params = params || {}
   const str = Object.keys(params).reduce((result, key) => {
     result += `${key}=${params[key]}&`
     return result
   }, '')
-  console.log(str)
   return `${baseUrl}/api${url}?${str.substr(0, str.length - 1)}`
 }
 
@@ -28,7 +28,6 @@ export const get = (url, params) => {
 }
 
 export const post = (url, params, datas) => {
-  console.log(baseUrl)
   return new Promise((resolve, reject) => {
     axios.post(parseUrl(url, params), datas)
       .then((resp) => {

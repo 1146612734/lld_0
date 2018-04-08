@@ -58,8 +58,8 @@ class MainAppBar extends React.Component {
   /*eslint-ensable*/
   loginButtonClick() {
     if (this.props.appState.user.isLogin) {
-      this.context.router.history.push('/user/nifo')
-    } else{
+      this.context.router.history.push('/user/info')
+    } else {
       this.context.router.history.push('/user/login')
     }
   }
