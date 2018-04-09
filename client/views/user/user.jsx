@@ -37,7 +37,7 @@ class User extends React.Component {
                 <UserIcon />
               </Avatar>
           }
-          <span className={classes.userName}>{user.loginName || '未登录'}</span>
+          <span className={classes.userName}>{user.loginname || '未登录'}</span>
         </div>
         {this.props.children}
       </Container>
