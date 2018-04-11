@@ -51,11 +51,11 @@ class MainAppBar extends React.Component {
   onHomeIconClick() {
     this.context.router.history.push('/list?tab=all')
   }
-  /*eslint-disable*/
-  createButtonClick() {
 
+  createButtonClick() {
+    this.context.router.history.push('/topic/create')
   }
-  /*eslint-ensable*/
+
   loginButtonClick() {
     if (this.props.appState.user.isLogin) {
       this.context.router.history.push('/user/info')
@@ -79,7 +79,7 @@ class MainAppBar extends React.Component {
             <Typography type="title" color="inherit" className={classes.flex}>
               JNode
             </Typography>
-            <Button className={classes.newtopicButton} color='primary' variant="raised" size="small" onClick={this.createButtonClick}>
+            <Button className={classes.newtopicButton} color="primary" variant="raised" size="small" onClick={this.createButtonClick}>
               新建话题
             </Button>
             <Button color="inherit" size="small" onClick={this.loginButtonClick}>

@@ -48,6 +48,7 @@ export class TopicStore {
   @observable topics
   @observable details
   @observable syncing = false
+  @observable createdTopics = []
 
   constructor({ syncing = false, topics = [], details = [] } = {}) {
     this.syncing = syncing
@@ -107,6 +108,29 @@ export class TopicStore {
           }
         }).catch(reject)
       }
+    })
+  }
+
+  @action createTopic(title, tab, content) {
+    return new Promise((resolve, reject) => {
+      post('/topics', {
+        needAccessToken: true,
+      }, {
+        title, tab, content,
+      }).then(resp => {
+        if (resp.success) {
+          const topic = {
+            title,
+            tab,
+            id: resp.topic_id,
+            create_at: Date.now(),
+          }
+          this.createdTopics.push(new Topic(createTopic(topic)))
+          resolve()
+        } else {
+          reject()
+        }
+      }).catch(reject)
     })
   }
 }
