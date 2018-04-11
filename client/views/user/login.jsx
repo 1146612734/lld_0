@@ -4,6 +4,10 @@ import {
   inject,
   observer,
 } from 'mobx-react'
+import {
+  Redirect,
+} from 'react-router-dom'
+import queryString from 'query-string'
 
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
@@ -27,10 +31,10 @@ class UserLogin extends React.Component {
     this.handleInput = this.handleInput.bind(this)
   }
 
-  componentWillMount() {
-    if (this.props.user.isLogin) {
-      this.context.router.history.replace('/user/info')
-    }
+  getFrom(location) {
+    location = location || this.props.location
+    const query = queryString.parse(location.search)
+    return query.from || '/user/info'
   }
 
   handleLogin() {
@@ -44,9 +48,6 @@ class UserLogin extends React.Component {
       helpText: '',
     })
     return this.props.appState.login(this.state.accesstoken)
-      .then(() => {
-        this.context.router.history.replace('/user/info')
-      })
       .catch(error => {
         //this.props.appState.notify({ message: msg })
         console.log(error)
@@ -61,6 +62,12 @@ class UserLogin extends React.Component {
 
   render() {
     const classes = this.props.classes
+    const from = this.getFrom()
+    const isLogin = this.props.user.isLogin
+
+    if (isLogin) {
+      return <Redirect to={from} />
+    }
 
     return (
       <UserWrapper>
@@ -92,6 +99,7 @@ UserLogin.propTypes = {
   classes: PropTypes.object.isRequired,
   appState: PropTypes.object.isRequired,
   user: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 }
 
 export default withStyles(loginStyles)(inject((stores) => {

@@ -76,8 +76,9 @@ export class TopicStore {
         tab,
       }).then((resp) => {
         if (resp.success) {
-          resp.data.forEach((topic) => {
-            this.addTopic(topic)
+          this.topics = resp.data.map((topic) => {
+            //this.addTopic(topic)
+            return new Topic(createTopic(topic))
           })
           resolve()
         } else {

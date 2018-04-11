@@ -6,6 +6,8 @@ import {
 } from 'mobx'
 import { post, get } from '../util/http'
 
+let notifyId = 0
+
 export default class AppState {
   @observable user = {
     isLogin: false,
@@ -37,6 +39,18 @@ export default class AppState {
       }).catch(reject)
     })
   }
+
+  @action notify(config) {
+    config.id = notifyId
+    notifyId += 1
+    this.activeNotifications.push(config)
+  }
+
+  @action closeNotify(notify) {
+    this.activeNotifications.splice(this.activeNotifications.indexOf(notify), 1)
+    this.notifications.push(notify)
+  }
+
   @action getUserDetail() {
     this.user.detail.syncing = true
     return new Promise((resolve, reject) => {
