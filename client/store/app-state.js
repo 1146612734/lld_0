@@ -1,7 +1,7 @@
 /*与业务逻辑无关，存储一些纯展示的一些变量*/
 import {
   observable,
-  //computed,
+  toJS,
   action,
 } from 'mobx'
 import { post, get } from '../util/http'
@@ -21,6 +21,12 @@ export default class AppState {
       syncing: false,
       list: [],
     },
+  }
+
+  init({ user }) {
+    if (user) {
+      this.user = user
+    }
   }
 
   @action login(accessToken) {
@@ -90,6 +96,12 @@ export default class AppState {
           //this.notify({ message: err.msg })
         })
     })
+  }
+
+  toJson() {
+    return {
+      user: toJS(this.user),
+    }
   }
 }
 

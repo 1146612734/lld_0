@@ -84,7 +84,7 @@ class MainAppBar extends React.Component {
             </Button>
             <Button color="inherit" size="small" onClick={this.loginButtonClick}>
               {
-                user.isLogin ? user.info.loginName : '登录'
+                user.isLogin ? user.info.loginname : '登录'
               }
             </Button>
           </Toolbar>

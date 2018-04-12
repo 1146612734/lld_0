@@ -11,15 +11,15 @@ import {
 } from 'mobx-react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'//head信息更新
-import querystring from 'query-string'
+import queryString from 'query-string'
 
 import Tabs, { Tab } from 'material-ui/Tabs'
 import List from 'material-ui/List'
 import { CircularProgress } from 'material-ui/Progress'
 //import Button from 'material-ui/Button'//需要哪个组件 加载哪个组件
 
-import { AppState } from '../../store/app-state'
-import { TopicStore } from '../../store/topic-store'
+/*import { AppState } from '../../store/app-state'
+import { TopicStore } from '../../store/topic-store'*/
 import Container from '../layout/container'
 import TopicListItem from './list-item'
 import { tabs } from '../../util/variable-define'
@@ -53,17 +53,18 @@ export default class TopicList extends React.Component {
   }
 
   asyncBootstrap() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        this.props.appState.count = 3
-        resolve(true)
-      })
+    const query = queryString.parse(this.props.location.search)
+    const tab = query.tab
+    return this.props.topicStore.fetchTopics(tab || 'all').then(() => {
+      return true
+    }).catch(() => {
+      return false
     })
   }
 
   getTab(search) {
     search = search || this.props.location.search
-    const query = querystring.parse(search)
+    const query = queryString.parse(search)
     return query.tab || 'all'
   }
 
@@ -169,8 +170,8 @@ export default class TopicList extends React.Component {
 }
 
 TopicList.wrappedComponent.propTypes = {
-  appState: PropTypes.instanceOf(AppState).isRequired,
-  topicStore: PropTypes.instanceOf(TopicStore).isRequired,
+  appState: PropTypes.object.isRequired,
+  topicStore: PropTypes.object.isRequired,
 }
 
 TopicList.propTypes = {

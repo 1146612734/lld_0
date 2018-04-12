@@ -8,7 +8,8 @@ import {
 import TextField from 'material-ui/TextField'
 import Radio from 'material-ui/Radio'
 import Button from 'material-ui/Button'
-import IconReply from 'material-ui-icons/Reply'
+//import IconReply from 'material-ui-icons/Reply'
+//import Icon from 'material-ui/Icon'
 import Snackbar from 'material-ui/Snackbar'
 import { withStyles } from 'material-ui/styles'
 
@@ -166,8 +167,8 @@ class TopicCreate extends React.Component {
               })
             }
           </div>
-          <Button fab="true" color="primary" onClick={this.handleCreate} className={classes.replyButton}>
-            <IconReply />
+          <Button variant="fab" color="primary" onClick={this.handleCreate} className={classes.replyButton}>
+            提交
           </Button>
         </div>
       </Container>
