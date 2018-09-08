@@ -11,18 +11,23 @@
     "type": "git",
     "url": "git+https://github.com/1146612734/lld_0.git"
   },
-  "author": "xiaolei",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/1146612734/lld_0/issues"
   },
   "homepage": "https://github.com/1146612734/lld_0#readme",
-  "devDependencies": {
-    "babel-loader": "^8.0.0",
-    "webpack": "^4.17.1",
-    "webpack-cli": "^3.1.0"
-  },
   "dependencies": {
-    "react-dom": "^16.4.2"
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2015-loose": "^8.0.0",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.0"
   }
 }
