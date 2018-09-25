@@ -16,6 +16,6 @@ app.get('*', function (req, res) {
 	res.send(template.replace('<!-- app -->', appString))
 })
 
-app.listen(3334, function () {
-	console.log('server is listening on 3334')
+app.listen(3333, function () {
+	console.log('server is listening on 3333')
 })
