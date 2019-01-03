@@ -3,7 +3,6 @@ const ReactSSR = require('react-dom/server')
 const fs = require('fs')
 const path = require('path')
 
-
 const isDev = process.env.NODE_ENV  === 'development'
 
 const app = express()
