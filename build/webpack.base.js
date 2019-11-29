@@ -1,16 +1,6 @@
 const path = require('path')
 
 module.exports = {
-  target: 'node', // 打包出的代码在node环境下执行
-  entry: {
-    app: path.join(__dirname, '../client/server-entry.js')
-  },
-  output: {
-    filename: 'server-entry.js',
-    path: path.join(__dirname, '../dist'),
-    publicPath: '/public',
-    libraryTarget: 'commonjs2'
-  },
   module: {
     rules: [
       {
