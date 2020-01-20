@@ -13,7 +13,7 @@ const config = {
   output: {
     filename: '[name][hash].js',
     path: path.join(__dirname, '../dist'),
-    publicPath: ''
+    publicPath: '/public'
   },
 
   plugins: [
@@ -31,7 +31,7 @@ if (isDev) {
   //   ]
   // }
   config.devServer = {
-    host: '0.0.0.0',
+    host: '0.0.0.0',  // 如果写localhost 或者0.0.0.1  局域网调试的时候连不上
     port: '8888',
     contentBase: path.join(__dirname, '../dist'),
     hot: true,

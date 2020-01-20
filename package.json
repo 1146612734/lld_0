@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --config build/webpack.config.client.js",
+    "build:client": "webpack --config build/webpack.config.client.js",
     "build:server": "webpack --config build/webpack.config.server.js",
     "dev:client": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
     "dev:server": "cross-env NODE_ENV=development node server/server.js",
     "clear": "rimraf dist",
-    "build:all": "npm run clear && npm run build:client && npm run build:server",
-    "lint": "eslint --ext .js --ext .jsx client/",
-    "precommit": "npm run lint"
+    "build": "npm run clear && npm run build:client && npm run build:server",
+    "start": "node server/server.js",
+    "lint": "eslint --ext .js --ext .jsx client/"
   },
   "repository": {
     "type": "git",
