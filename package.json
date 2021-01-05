@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/1146612734/lld_0#readme",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "express": "^4.16.3",
     "react": "^16.5.0",
     "react-dom": "^16.5.0"
